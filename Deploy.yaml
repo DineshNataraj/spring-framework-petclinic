@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: petclinic-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: petclinicapp
+    spec:
+      containers:
+      - name: springapp
+        image: dineshkumar55/sprintbootpetclinic:petclinicimage-ImageVersion
+        ports:
+        - containerPort: 8080
