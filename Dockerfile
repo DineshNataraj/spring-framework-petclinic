@@ -3,8 +3,6 @@ FROM centos:6.10
 # LS_COLORS
 RUN yum update -y \
  && yum install -y java-1.8.0-openjdk \
- && echo "export LS_COLORS=\$LS_COLORS:'di=0;35:'" >> ~/.bash_profile \
- && source ~/.bash_profile
 
 # Tomcat to build
 WORKDIR /opt/apache-tomcat
