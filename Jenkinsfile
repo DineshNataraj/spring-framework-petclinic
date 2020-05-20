@@ -12,5 +12,17 @@ agent any
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
     }
+    stage('mvn build')
+    {
+      steps {
+        MavenCompile()
+      }
+    }
+    stage ('sonar analysis')
+    {
+      steps {
+        MavenSonarInt()
+      }
+    }
   }
 }
