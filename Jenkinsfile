@@ -8,7 +8,7 @@ agent any
      steps {
          //ef projects = readJSON file: 'Projects.json'
          //def data = new JsonSlurperClassic().parseText(projects)
-       myPipeline(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
+       CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
     }
