@@ -30,8 +30,9 @@ agent any
             credentialsId: "mydockerhubcredentials",
             usernameVariable: "Username",
             passwordVariable: "Password"
-        )]) 
+        )]) {
         mybuilddocker('dineshkumar55', 'sprintbootpetclinic', 'petclinicimage')
+        }
       }
     }     
    stage ('Kube Deploy') {
