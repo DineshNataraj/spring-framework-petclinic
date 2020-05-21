@@ -31,7 +31,7 @@ agent any
     }     
    stage ('Kube Deploy') {
       steps {
-        mykubeconfig('awstest','us-west-2', 'springbootapp')
+        mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
       }
     }  
   }
