@@ -18,11 +18,21 @@ agent any
         MavenCompile()
       }
     }
-    stage ('sonar analysis')
-    {
+//    stage ('sonar analysis')
+//    {
+//      steps {
+//        MavenSonarInt()
+//      }
+//    }
+    stage ('Docker build') {
       steps {
-        MavenSonarInt()
+        mydocker('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
       }
-    }
+    }     
+   stage ('Kube Deploy') {
+      steps {
+        mykubeconfig('awstest','us-west-2', 'springbootapp')
+      }
+    }  
   }
 }
