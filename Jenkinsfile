@@ -24,7 +24,7 @@ agent any
 //        MavenSonarInt()
 //      }
 //    }
-    stage ('Docker build') {
+    stage ('Build Docker') {
       steps {
         mydocker('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
       }
