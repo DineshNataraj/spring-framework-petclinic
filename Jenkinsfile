@@ -38,7 +38,7 @@ agent any
    stage ('Kube Deploy') {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'myawskeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        kubeupdate('us-west-2', 'petclinic-cluster55')
+        mykubeconfig('us-west-2', 'petclinic-cluster55')
         } 
       }
     }  
