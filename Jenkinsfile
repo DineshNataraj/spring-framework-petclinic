@@ -26,12 +26,12 @@ agent any
 //    }
     stage ('Build Docker') {
       steps {
-        mybuilddocker('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
+        mybuilddocker.call('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
       }
     }     
    stage ('Kube Deploy') {
       steps {
-        mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
+        mykubeconfig.call('myawskeys','us-west-2', 'petclinic-cluster55')
       }
     }  
   }
