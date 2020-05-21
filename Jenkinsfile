@@ -26,7 +26,7 @@ agent any
 //    }
     stage ('Build Docker') {
       steps {
-        mydocker('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
+        mybuilddocker('dineshkumar55', 'sprintbootpetclini', 'petclinicimage')
       }
     }     
    stage ('Kube Deploy') {
