@@ -26,13 +26,26 @@ agent any
 //    }
     stage ('Build Docker') {
       steps {
+        withCredentials([usernamePassword(
+            credentialsId: "mydockerhubcredentials",
+            usernameVariable: "Username",
+            passwordVariable: "Password"
+        )]) 
         mybuilddocker('dineshkumar55', 'sprintbootpetclinic', 'petclinicimage')
       }
     }     
    stage ('Kube Deploy') {
       steps {
-        mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'myawskeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        kubeupdate('us-west-2', 'petclinic-cluster55')
+        } 
       }
     }  
-  }
 }
+}
+}
+        //mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
+      //}
+   // }  
+ // }
+//}
