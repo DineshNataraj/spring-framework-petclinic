@@ -43,7 +43,7 @@ agent any
     }  
 }
 }
-}
+//}
         //mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
       //}
    // }  
