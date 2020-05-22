@@ -18,12 +18,12 @@ agent any
         MavenCompile()
       }
     }
-//    stage ('sonar analysis')
-//    {
-//      steps {
-//        MavenSonarInt()
-//      }
-//    }
+    stage ('sonar analysis')
+    {
+      steps {
+        MavenSonarInt()
+      }
+    }
     stage ('Build Docker') {
       steps {
         withCredentials([usernamePassword(
