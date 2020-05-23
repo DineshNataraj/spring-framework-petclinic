@@ -6,8 +6,8 @@ pipeline
 agent any
   environment{
    def name='/var/lib/jenkins/workspace/mysharedlib/MyInputsFile.json' 
-   jsonSlurper = 'new JsonSlurper()'
-   def data = 'jsonSlurper.parse(new File(filename))'
+   jsonSlurper = new JsonSlurper()
+   def data = jsonSlurper.parse(new File(filename))
   }
   stages {
    stage('checkout'){
