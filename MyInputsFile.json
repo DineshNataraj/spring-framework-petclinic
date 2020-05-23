@@ -2,7 +2,7 @@
 "Jenkinsfile": {
   "Gitcredential": [
   {
-    "url": "restapi"
+    "url": "restapi",
     "branch": "master"
   }
   ]
