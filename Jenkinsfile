@@ -46,7 +46,7 @@ agent any
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'myawskeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) //{
         mykubeconfig('us-west-2', 'petclinic-cluster55')
-        //} 
+        } 
       }
     }  
 }
