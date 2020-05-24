@@ -11,6 +11,6 @@ spec:
     spec:
       containers:
       - name: springapp
-        image: dineshkumar55/sprintbootpetclinic:petclinicimage-ImageVersion
+        image: dineshkumar55/sprintbootpetclinic:petclinicimage-BUILD_NUMBER
         ports:
         - containerPort: 8080
