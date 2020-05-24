@@ -23,7 +23,7 @@ agent any
         MavenCompile()
       }
     }
-    stage('Junit Test') {
+    stage('Junit Testing') {
        steps {
           junittest('**/target/surefire-reports/*.xml')
        }
