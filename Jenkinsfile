@@ -25,7 +25,7 @@ agent any
     }
     stage('Junit Testing') {
        steps {
-          junittest('**/target/surefire-reports/*.xml')
+          testingbyjunit('**/target/surefire-reports/*.xml')
        }
     }  
     stage ('sonar analysis')
