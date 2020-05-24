@@ -1,11 +1,9 @@
 @Library('PetClinicSharedLib') _
 import groovy.json.*
 //import groovy.json.JsonSlurperClassic
-  
    //def filename='/var/lib/jenkins/workspace/SharedLibrary-Demo/MyInputsFile.json' 
    //jsonSlurper = new JsonSlurper()
    //def data = jsonSlurper.parse(new File(filename))
-  
 pipeline
 {
 agent any
