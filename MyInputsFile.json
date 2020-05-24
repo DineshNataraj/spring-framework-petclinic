@@ -2,7 +2,7 @@
 "Jenkinsfile": {
   "Gitcredential": [
   {
-    "url": "restapi",
+    "url": "https://github.com/DineshNataraj/spring-framework-petclinic.git",
     "branch": "master"
   }
   ]
