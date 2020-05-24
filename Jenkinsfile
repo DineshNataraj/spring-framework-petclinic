@@ -23,6 +23,11 @@ agent any
         MavenCompile()
       }
     }
+    stage('Junit Test') {
+       steps {
+          junittest('**/target/surefire-reports/*.xml')
+       }
+    }  
     stage ('sonar analysis')
     {
       steps {
