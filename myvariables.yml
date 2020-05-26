@@ -1,0 +1,15 @@
+scm:
+   branch: 'master'
+   repo: 'https://github.com/DineshNataraj/spring-framework-petclinic.git'
+dockerhub:
+   hubuser: 'dineshkumar55'
+   hubrepo: 'sprintbootpetclinic'
+   hubtag: 'petclinicimage'
+eks:
+   ekscluster: 'petclinic-cluster55'
+   eksregion: 'us-west-2'
+CredId:
+   dockercrid: 'mydockerhubcredentials'
+   awsid: 'myawskeys'
+junitloc:
+   testpath: '**/target/surefire-reports/*.xml'
