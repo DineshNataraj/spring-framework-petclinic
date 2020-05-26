@@ -1,4 +1,8 @@
 @Library('PetClinicSharedLib') _
+def readValuesYml(){
+def props = readYaml (file: 'myvariables.yml')
+return props;
+ }
 import groovy.json.*
 //import groovy.json.JsonSlurperClassic
    //def filename='/var/lib/jenkins/workspace/SharedLibrary-Demo/MyInputsFile.json' 
@@ -9,6 +13,14 @@ pipeline
 agent any
   
   stages {
+     stage ('Read variables') {
+     steps {
+        script {
+                props = readValuesYml()
+                println props.getClass()
+     }
+    }
+  }
    stage('checkout'){
      steps {
          //ef projects = readJSON file: 'Projects.json'
@@ -23,9 +35,9 @@ agent any
         MavenCompile()
       }
     }
-    stage('Junit Testing') {
+    /*stage('Junit Testing') {
        steps {
-          testingbyjunit('**/target/surefire-reports/*.xml')
+          testingbyjunit(props.junitloc.testpath)
        }
     }  
     stage ('sonar analysis')
@@ -33,22 +45,22 @@ agent any
       steps {
         MavenSonarInt()
       }
-    }
+    */
     stage ('Build Docker') {
       steps {
         withCredentials([usernamePassword(
-            credentialsId: "mydockerhubcredentials",
+            credentialsId: props.CredId.dockercredid,
             usernameVariable: "Username",
             passwordVariable: "Password"
         )]) {
-        mybuilddocker('dineshkumar55', 'sprintbootpetclinic', 'petclinicimage')
+        mybuilddocker(props.dockerhub.dockhubuser, props.dockerhub.dockhubrepo, props.dockerhub.dockhubtag)
         }
       }
     }     
    stage ('Kube Deploy') {
       steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'myawskeys', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        mykubeconfig('us-west-2', 'petclinic-cluster55')
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props.CredId.awsaccesskeyid, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        mykubeconfig(props.eks.eksclusterregion, props.eks.ekscluster)
         } 
       }
     }  
