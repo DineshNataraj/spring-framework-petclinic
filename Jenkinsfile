@@ -39,13 +39,22 @@ agent any
        steps {
           testingbyjunit(props.junitloc.testpath)
        }
-    }  
+    }  */
     stage ('sonar analysis')
     {
-      steps {
+      /*steps {
         MavenSonarInt()
-      }
-    */
+      }*/
+     steps {
+            script {
+                 def scannerHome = tool 'mySonarqubepath';
+                 withSonarQubeEnv("MySonarqube") {
+                 sh "${tool("mySonarqubepath")}/bin/sonar-scanner"
+               }
+              }
+             }
+          }
+    //}
     stage ('Build Docker') {
       steps {
         withCredentials([usernamePassword(
