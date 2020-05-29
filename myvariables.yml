@@ -13,3 +13,7 @@ CredId:
    awsaccesskeyid: 'myawskeys'
 junitloc:
    testpath: '**/target/surefire-reports/*.xml'
+sonaranalysis:
+   server: 'SonarQubeServer' 
+   scanner: 'Sonar_Scanner'
+   scannerproperties: 'sonar-project.properties'
