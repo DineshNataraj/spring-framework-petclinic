@@ -44,7 +44,7 @@ agent any
     {
      steps {
           withSonarQubeEnv(props.sonar.server) {
-                         mysonaranalysis(props.sonaranalysis.scannerproperties)                  
+                         mysonaranalysis(props.sonaranalysis.server,props.sonaranalysis.scanner,props.sonaranalysis.scannerproperties)                  
           }
          }
         } 
