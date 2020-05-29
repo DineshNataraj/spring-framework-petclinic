@@ -14,6 +14,6 @@ CredId:
 junitloc:
    testpath: '**/target/surefire-reports/*.xml'
 sonaranalysis:
-   server: 'SonarQubeServer' 
-   scanner: 'Sonar_Scanner'
+   server: 'MySonarqube' 
+   scanner: 'mySonarqubepath'
    scannerproperties: 'sonar-project.properties'
