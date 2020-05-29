@@ -43,9 +43,9 @@ agent any
     stage ('sonar analysis')
     {
      steps {
-          withSonarQubeEnv(props.sonar.server) {
+          //withSonarQubeEnv(props.sonar.server) {
                          mysonaranalysis(props.sonaranalysis.server,props.sonaranalysis.scanner,props.sonaranalysis.scannerproperties)                  
-          }
+          //}
          }
         } 
       /*steps {
