@@ -35,11 +35,11 @@ agent any
         MavenCompile()
       }
     }
-    /*stage('Junit Testing') {
+    stage('Junit Testing') {
        steps {
           testingbyjunit(props.junitloc.testpath)
        }
-    }  */
+    }
     stage ('sonar analysis')
     {
      steps {
@@ -72,7 +72,7 @@ agent any
         }
       }
     }     
-   stage ('Kube Deploy') {
+   stage ('K8s Deployment') {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props.CredId.awsaccesskeyid, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
         mykubeconfig(props.eks.eksclusterregion, props.eks.ekscluster)
