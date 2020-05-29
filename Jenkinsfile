@@ -42,10 +42,16 @@ agent any
     }  */
     stage ('sonar analysis')
     {
+     steps {
+          withSonarQubeEnv(props.sonar.server) {
+                         sonaranalysis(props.sonar.scannerproperties)                  
+          }
+         }
+        } 
       /*steps {
         MavenSonarInt()
       }*/
-     steps {
+     /*steps {
             script {
                  def scannerHome = tool 'mySonarqubepath';
                  withSonarQubeEnv("MySonarqube") {
@@ -53,7 +59,7 @@ agent any
                }
               }
              }
-          }
+          }*/
     //}
     stage ('Build Docker') {
       steps {
