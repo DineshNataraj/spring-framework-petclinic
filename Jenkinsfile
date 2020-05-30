@@ -26,9 +26,9 @@ agent any
        //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
        echo "checkout workspace print"
        echo "${branch}"
-       echo ${branch}
+       //echo ${branch}
        echo "${props.branch}"
-       echo ${props.branch}
+       //echo ${props.branch}
        CheckoutWorkspace(branch: props.branch , scmUrl: props.repo) 
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
