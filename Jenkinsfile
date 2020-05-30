@@ -16,7 +16,7 @@ agent any
         script {
                 props = readPropertiesValues()
                 println props.getClass()
-                echo(properties.branch)
+                //echo(properties.branch)
      }
     }
   }
