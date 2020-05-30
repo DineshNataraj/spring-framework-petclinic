@@ -24,12 +24,6 @@ agent any
      steps {
        //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
        echo "checkout workspace print"
-       //echo "${branch}"
-       //echo properties.branch
-       //println properties.branch
-       //echo ${branch}
-       //echo "${props.branch}"
-       //echo ${props.branch}
        CheckoutWorkspace(branch: props["branch"] , scmUrl: props["repo"]) 
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
@@ -40,6 +34,16 @@ agent any
         MavenCompile()
       }
     }
+   stage('JaCoCoverage') {
+            steps {
+                echo 'Java Code Coverage'
+                jacoco(
+                execPattern: '**/**.exec',
+                classPattern: '**/classes',
+                sourcePattern: '**/src/main/java',
+                 )
+            }
+        }
     stage('Junit Testing') {
        steps {
           testingbyjunit(props["testpath"])
