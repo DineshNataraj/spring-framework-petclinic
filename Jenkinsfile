@@ -1,8 +1,8 @@
 @Library('PetClinicSharedLib') _
-def readValuesYml(){
+def readPropertiesValues(){
 //def props = readYaml (file: 'myvariables.yml')
- def props = readProperties  file: 'myvariables.properties'
-return props;
+ def props = readProperties file: 'myvariables.properties'
+ return props;
  }
 import groovy.json.*
 
@@ -14,7 +14,7 @@ agent any
      stage ('Read variables') {
      steps {
         script {
-                props = readValuesYml()
+                props = readPropertiesValues()
                 println props.getClass()
      }
     }
