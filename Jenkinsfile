@@ -16,6 +16,7 @@ agent any
         script {
                 props = readPropertiesValues()
                 println props.getClass()
+                echo properties.branch
      }
     }
   }
@@ -24,10 +25,12 @@ agent any
        //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
       echo "checkout workspace print"
        echo "${branch}"
+       echo properties.branch
+       println properties.branch
        //echo ${branch}
        echo "${props.branch}"
        //echo ${props.branch}
-       CheckoutWorkspace(branch: props['branch'] , scmUrl: props['repo']) 
+       CheckoutWorkspace(branch: props["branch"] , scmUrl: props["repo"]) 
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
     }
@@ -39,32 +42,32 @@ agent any
     }
     stage('Junit Testing') {
        steps {
-          testingbyjunit(props['testpath'])
+          testingbyjunit(props["testpath"])
        }
     }
     stage ('sonar analysis')
     {
      steps {
           //withSonarQubeEnv(props.sonar.server) {
-                         mysonaranalysis(props['server'],props['scanner'],props['scannerproperties'])                  
+                         mysonaranalysis(props["server"],props["scanner"],props["scannerproperties"])                  
           //}
          }
         } 
     stage ('Build Docker') {
       steps {
         withCredentials([usernamePassword(
-            credentialsId: props.dockercredid,
+            credentialsId: props["dockercredid"],
             usernameVariable: "Username",
             passwordVariable: "Password"
         )]) {
-        mybuilddocker(props.dockhubuser, props.dockhubrepo, props.dockhubtag)
+        mybuilddocker(props["dockhubuser"], props["dockhubrepo"], props["dockhubtag")
         }
       }
     }     
    stage ('K8s Deployment') {
       steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props.awsaccesskeyid, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        mykubeconfig(props.eksclusterregion, props.ekscluster)
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props["awsaccesskeyid"], secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        mykubeconfig(props["eksclusterregion"], props["ekscluster"])
         } 
       }
     }  
