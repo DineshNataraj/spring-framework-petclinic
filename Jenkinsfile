@@ -21,15 +21,13 @@ agent any
   }
    stage('checkout'){
      steps {
-         //ef projects = readJSON file: 'Projects.json'
-         //def data = new JsonSlurperClassic().parseText(projects)
        //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
-      echo "checkout workspace print : ${branch}"
+      echo "checkout workspace print"
        echo "${branch}"
        //echo ${branch}
        echo "${props.branch}"
        //echo ${props.branch}
-       CheckoutWorkspace(branch: props.branch , scmUrl: props.repo) 
+       CheckoutWorkspace(branch: props['branch'] , scmUrl: props['repo']) 
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
     }
@@ -41,14 +39,14 @@ agent any
     }
     stage('Junit Testing') {
        steps {
-          testingbyjunit(props.testpath)
+          testingbyjunit(props['testpath'])
        }
     }
     stage ('sonar analysis')
     {
      steps {
           //withSonarQubeEnv(props.sonar.server) {
-                         mysonaranalysis(props.server,props.scanner,props.scannerproperties)                  
+                         mysonaranalysis(props['server'],props['scanner'],props['scannerproperties'])                  
           //}
          }
         } 
