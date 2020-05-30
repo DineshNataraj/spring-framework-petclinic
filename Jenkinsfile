@@ -1,6 +1,7 @@
 @Library('PetClinicSharedLib') _
 def readValuesYml(){
-def props = readYaml (file: 'myvariables.yml')
+//def props = readYaml (file: 'myvariables.yml')
+ def props = readProperties  file: 'dir/myvariables.properties'
 return props;
  }
 import groovy.json.*
