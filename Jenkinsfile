@@ -5,10 +5,7 @@ def readValuesYml(){
 return props;
  }
 import groovy.json.*
-//import groovy.json.JsonSlurperClassic
-   //def filename='/var/lib/jenkins/workspace/SharedLibrary-Demo/MyInputsFile.json' 
-   //jsonSlurper = new JsonSlurper()
-   //def data = jsonSlurper.parse(new File(filename))
+
 pipeline
 {
 agent any
@@ -26,7 +23,8 @@ agent any
      steps {
          //ef projects = readJSON file: 'Projects.json'
          //def data = new JsonSlurperClassic().parseText(projects)
-       CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
+       //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
+       CheckoutWorkspace(branch: props.branch , scmUrl: props.repo) 
        // myDeliveryPipeline('master', 'https://github.com/DineshNataraj/spring-framework-petclinic')
      }
     }
@@ -38,53 +36,34 @@ agent any
     }
     stage('Junit Testing') {
        steps {
-          testingbyjunit(props.junitloc.testpath)
+          testingbyjunit(props.testpath)
        }
     }
     stage ('sonar analysis')
     {
      steps {
           //withSonarQubeEnv(props.sonar.server) {
-                         mysonaranalysis(props.sonaranalysis.server,props.sonaranalysis.scanner,props.sonaranalysis.scannerproperties)                  
+                         mysonaranalysis(props.server,props.scanner,props.scannerproperties)                  
           //}
          }
         } 
-      /*steps {
-        MavenSonarInt()
-      }*/
-     /*steps {
-            script {
-                 def scannerHome = tool 'mySonarqubepath';
-                 withSonarQubeEnv("MySonarqube") {
-                 sh "${tool("mySonarqubepath")}/bin/sonar-scanner"
-               }
-              }
-             }
-          }*/
-    //}
     stage ('Build Docker') {
       steps {
         withCredentials([usernamePassword(
-            credentialsId: props.CredId.dockercredid,
+            credentialsId: props.dockercredid,
             usernameVariable: "Username",
             passwordVariable: "Password"
         )]) {
-        mybuilddocker(props.dockerhub.dockhubuser, props.dockerhub.dockhubrepo, props.dockerhub.dockhubtag)
+        mybuilddocker(props.dockhubuser, props.dockhubrepo, props.dockhubtag)
         }
       }
     }     
    stage ('K8s Deployment') {
       steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props.CredId.awsaccesskeyid, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        mykubeconfig(props.eks.eksclusterregion, props.eks.ekscluster)
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: props.awsaccesskeyid, secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        mykubeconfig(props.eksclusterregion, props.ekscluster)
         } 
       }
     }  
 }
 }
-//}
-        //mykubeconfig('myawskeys','us-west-2', 'petclinic-cluster55')
-      //}
-   // }  
- // }
-//}
