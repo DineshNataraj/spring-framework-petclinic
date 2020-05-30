@@ -24,7 +24,7 @@ agent any
          //ef projects = readJSON file: 'Projects.json'
          //def data = new JsonSlurperClassic().parseText(projects)
        //CheckoutWorkspace(branch: 'master', scmUrl: 'https://github.com/DineshNataraj/spring-framework-petclinic.git')
-       echo "checkout workspace print"
+      echo "checkout workspace print : ${branch}"
        echo "${branch}"
        //echo ${branch}
        echo "${props.branch}"
