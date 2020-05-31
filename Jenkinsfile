@@ -34,16 +34,6 @@ agent any
         MavenCompile()
       }
     }
-   stage('JaCoCoverage') {
-            steps {
-                echo 'Java Code Coverage'
-                jacoco(
-                execPattern: '**/**.exec',
-                classPattern: '**/classes',
-                sourcePattern: '**/src/main/java',
-                 )
-            }
-        }
     stage('Junit Testing') {
        steps {
           testingbyjunit(props["testpath"])
